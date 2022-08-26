@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img src="https://th.bing.com/th/id/OIP.fyers8Hqp7jEYKFEoy8cPQHaHa?pid=ImgDet&rs=1" />
+    <ion-card-header>
+      <ion-card-subtitle>INGRESAR</ion-card-subtitle>
+      <ion-card-title>CURSITO POWER UP</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      
+      <ion-item>
+        <ion-label>Usuario</ion-label>
+        <ion-input type="text" placeholder="Ingrese usuario" [(ngModel)]="user"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Contraseña</ion-label>
+        <ion-input type="password" placeholder="Ingrese contraseña" [(ngModel)]="password"></ion-input>
+      </ion-item>
+      <ion-button (click)="login()">INGRESAR</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <a routerLink='/registrar'>Ir a registrar...</a>
+
+</ion-content>
