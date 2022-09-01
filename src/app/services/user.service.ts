@@ -28,8 +28,12 @@ export class UserService {
   constructor() { }
 
   //métodos del CRUD:
-  agregarUsuario(usuario){
-    this.usuarios.push(usuario);
+  agregarUsuario(usuario): boolean{
+    if ( this.obtenerUsuario(usuario.rut) == undefined ) {
+      this.usuarios.push(usuario);
+      return true;
+    }
+    return false;
   }
   eliminarUsuario(rut){
     this.usuarios.forEach((usu, index) => {

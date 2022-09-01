@@ -15,18 +15,22 @@ export class LoginPage implements OnInit {
   password: string;
 
   constructor(private toastController: ToastController, private router: Router, 
-    private userService: UserService) { }
+    private usuarioService: UserService) { }
 
   ngOnInit() {
   }
 
   //método para ingresar a home:
   login(){
-    var usuarioLogin = this.userService.validarRutPassword(this.user, this.password);
+    var usuarioLogin = this.usuarioService.validarRutPassword(this.user, this.password);
 
     //validar que al ingresar admin admin en el formulario, me diga hola:
     if (usuarioLogin != undefined) {
-      this.router.navigate(['/home']);
+      if (usuarioLogin.tipo_usuario == 'administrador') {
+        this.router.navigate(['/home']);
+      }else{
+        this.router.navigate(['/alumno']);
+      }
     }else{
       this.tostadaError();
     }
@@ -41,3 +45,4 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 }
+
