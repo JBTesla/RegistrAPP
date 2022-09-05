@@ -19,6 +19,15 @@
       <ion-input type="text" placeholder="Ingrese nombre" formControlName="nom_completo"></ion-input>
     </ion-item>
     <ion-item>
+      <ion-label position="stacked">correo electronico</ion-label>
+      <ion-input type="text" placeholder="Ingrese correo" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select placeholder="tipo de usuario" formControlName="tipo_usuario">
+        <ion-select-option *ngFor="let tipo of tipoUser">{{tipo.tipo_usu}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
       <ion-label position="stacked">Fecha nacimiento</ion-label>
       <ion-input type="date" placeholder="Ingrese fecha nacimiento" formControlName="fecha_nac"></ion-input>
     </ion-item>

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start">recuperar contraseña</ion-title>
+    <ion-button slot="end" routerLink="/home">
+      <ion-icon name="log-in-outline"></ion-icon>
+      Volver a home
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="fondo">
+    <ion-card>
+      <img src="../../../assets/img/usuario.png" alt="imagen_login" class="imagen_login"/>
+      <ion-card-header>
+        <ion-card-title>Recuperar Contraseña</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Correo institucional</ion-label>
+          <ion-input type="text" placeholder="Ingrese correo registrado" [(ngModel)]="email"></ion-input>
+        </ion-item>
+        <ion-button (click)="login()">Enviar correo de recuperacion</ion-button>
+      </ion-card-content>
+      <a routerLink='/registrar'>Ir a registrar...</a>
+    </ion-card>
+  </div>
+</ion-content>
+

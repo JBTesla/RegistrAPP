@@ -3,16 +3,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
+
 @Component({
-  selector: 'app-registro',
-  templateUrl: './registro.page.html',
-  styleUrls: ['./registro.page.scss'],
+  selector: 'app-registrar',
+  templateUrl: './registrar.page.html',
+  styleUrls: ['./registrar.page.scss'],
 })
-export class RegistroPage implements OnInit {
+export class RegistrarPage implements OnInit {
 
   //VAMOS A CREAR EL GRUPO DEL FORMULARIO:
   alumno = new FormGroup({
     rut : new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,2}.[0-9]{3}.[0-9]{3}-[0-9kK]{1}')]),
+    email: new FormControl('',[]),
     nom_completo: new FormControl('', [Validators.required, Validators.minLength(3)]),
     fecha_nac: new FormControl('', Validators.required),
     semestre: new FormControl('', [Validators.required, Validators.min(1), Validators.max(8)]),

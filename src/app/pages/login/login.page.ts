@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -27,7 +27,9 @@ export class LoginPage implements OnInit {
     //validar que al ingresar admin admin en el formulario, me diga hola:
     if (usuarioLogin != undefined) {
       if (usuarioLogin.tipo_usuario == 'administrador') {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/administrador']);
+      }else if(usuarioLogin.tipo_usuario == 'profesor'){
+        this.router.navigate(['/profesor']);
       }else{
         this.router.navigate(['/alumno']);
       }
@@ -44,5 +46,8 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
-}
 
+
+
+
+}

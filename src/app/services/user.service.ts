@@ -9,25 +9,43 @@ export class UserService {
   usuarios: any[] = [
     {
       rut: '11.111.111-1',
-      nom_completo: 'Satan',
+      nom_completo: 'Admin',
+      email:'admin@duoc.cl',
       fecha_nac: '1990-03-24',
       semestre: 1,
-      password: 'satan123',
+      password: 'admin123',
       tipo_usuario: 'administrador'
     },
     {
       rut: '11.111.111-2',
-      nom_completo: 'Satan',
+      nom_completo: 'Alumno',
+      email: 'alumno@duocuc.cl',
       fecha_nac: '1990-03-24',
       semestre: 1,
-      password: 'satan123',
-      tipo_usuario: 'administrador'
+      password: 'alumno123',
+      tipo_usuario: 'alumno'
+    },
+    {
+      rut: '11.111.111-3',
+      nom_completo: 'Profesor',
+      email: 'profesor@profesor.duoc.cl',
+      fecha_nac: '1990-03-24',
+      semestre: 1,
+      password: 'profesor123',
+      tipo_usuario: 'profesor'
     }
   ];
 
   constructor() { }
 
   //métodos del CRUD:
+  recuperarPass(usuario): boolean{
+    if ( this.obtenerUsuario(usuario.email) == undefined ) {
+      this.usuarios.push(usuario);
+      return true;
+    }
+    return false;
+  }
   agregarUsuario(usuario): boolean{
     if ( this.obtenerUsuario(usuario.rut) == undefined ) {
       this.usuarios.push(usuario);
