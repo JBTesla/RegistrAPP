@@ -16,10 +16,10 @@
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <ion-label>Correo institucional</ion-label>
+          <ion-label>Correo institucional: </ion-label>
           <ion-input type="text" placeholder="Ingrese correo registrado" [(ngModel)]="email"></ion-input>
-        </ion-item>
-        <ion-button (click)="login()">Enviar correo de recuperacion</ion-button>
+        </ion-item >
+        <ion-button (click)="recuperarPass()">Enviar correo de recuperacion</ion-button>
       </ion-card-content>
       <a routerLink='/registrar'>Ir a registrar...</a>
     </ion-card>
