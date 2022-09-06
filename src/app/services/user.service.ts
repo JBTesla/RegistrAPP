@@ -10,8 +10,8 @@ export class UserService {
     {
       rut: '11.111.111-1',
       nom_completo: 'Admin',
-      email:'admin@duoc.cl',
-      fecha_nac: '1990-03-24',
+      email:'ad.min@duoc.cl',
+      fecha_nac: '1990-05-01',
       semestre: 1,
       password: 'admin123',
       tipo_usuario: 'administrador'
@@ -19,17 +19,17 @@ export class UserService {
     {
       rut: '11.111.111-2',
       nom_completo: 'Alumno',
-      email: 'alumno@duocuc.cl',
-      fecha_nac: '1990-03-24',
-      semestre: 1,
+      email: 'al.mno@duocuc.cl',
+      fecha_nac: '1999-03-03',
+      semestre: 3,
       password: 'alumno123',
       tipo_usuario: 'alumno'
     },
     {
       rut: '11.111.111-3',
       nom_completo: 'Profesor',
-      email: 'profesor@profesor.duoc.cl',
-      fecha_nac: '1990-03-24',
+      email: 'pr.ofe@profesor.duoc.cl',
+      fecha_nac: '1980-06-24',
       semestre: 1,
       password: 'profesor123',
       tipo_usuario: 'profesor'

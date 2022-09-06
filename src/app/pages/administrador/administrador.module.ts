@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputTrimModule } from 'ng2-trim-directive';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -14,7 +15,8 @@ import { AdministradorPage } from './administrador.page';
     FormsModule,
     IonicModule,
     AdministradorPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InputTrimModule,
   ],
   declarations: [AdministradorPage]
 })

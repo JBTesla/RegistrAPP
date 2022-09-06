@@ -24,7 +24,6 @@ export class LoginPage implements OnInit {
   login(){
     var usuarioLogin = this.usuarioService.validarRutPassword(this.user, this.password);
 
-    //validar que al ingresar admin admin en el formulario, me diga hola:
     if (usuarioLogin != undefined) {
       if (usuarioLogin.tipo_usuario == 'administrador') {
         this.router.navigate(['/administrador']);

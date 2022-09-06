@@ -12,7 +12,6 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegistrarPage implements OnInit {
 
-  //VAMOS A CREAR EL GRUPO DEL FORMULARIO:
   alumno = new FormGroup({
     rut : new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,2}.[0-9]{3}.[0-9]{3}-[0-9kK]{1}')]),
     email: new FormControl('',[Validators.required,Validators.pattern(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@['duocuc'-'profesor.duoc'-'duoc']+(\.cl)$/),Validators.email]),
@@ -23,8 +22,7 @@ export class RegistrarPage implements OnInit {
     tipo_usuario: new FormControl('alumno')
   });
 
-  //VAMOS A CREAR UNA VARIABLE PARA OBTENER LA LISTA DE USUARIOS DEL SERVICIO DE USUARIOS:
-  //usuarios: any[] = [];
+
   verificar_password: string;
 
   constructor(private usuarioService: UserService, private router: Router ,private rutService: RutService,private alertController: AlertController) { }
@@ -33,7 +31,7 @@ export class RegistrarPage implements OnInit {
     //this.usuarios = this.usuarioService.obtenerUsuarios();
   }
 
-  //método del formulario
+
   registrar(){
     if (this.alumno.controls.password.value != this.verificar_password) {
       alert('CONTRASEÑAS NO COINCIDEN!');

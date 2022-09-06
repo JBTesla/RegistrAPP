@@ -10,7 +10,6 @@ import { AlertController } from '@ionic/angular';
 })
 export class AdministradorPage implements OnInit {
 
-  //VAMOS A CREAR EL GRUPO DEL FORMULARIO:
 
   tipoUser: any[]=[{
     tipo_usu:'alumno'
@@ -25,14 +24,14 @@ export class AdministradorPage implements OnInit {
   alumno = new FormGroup({
     rut : new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,2}.[0-9]{3}.[0-9]{3}-[0-9kK]{1}')]),
     nom_completo: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    email: new FormControl('',[]),
+    email: new FormControl('',[Validators.required,Validators.pattern(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@['duocuc'-'profesor.duoc'-'duoc']+(\.cl)$/),Validators.email]),
     fecha_nac: new FormControl('', Validators.required),
     semestre: new FormControl('', [Validators.required, Validators.min(1), Validators.max(8)]),
     password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(18)]),
     tipo_usuario: new FormControl('this.tipoUser')
   });
 
-  //VAMOS A CREAR UNA VARIABLE PARA OBTENER LA LISTA DE USUARIOS DEL SERVICIO DE USUARIOS:
+
   usuarios: any[] = [];
   verificar_password: string;
 
