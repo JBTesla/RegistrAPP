@@ -8,7 +8,7 @@
 }
 
 ion-card {
-    --background: linear-gradient(#e66465, #9198e5);
+    --background: linear-gradient(#5adadf, #e2e3ee);
     margin: 0 auto;
     top: 5vh;
     height: 90vh;
@@ -18,19 +18,19 @@ ion-card {
     align-items: center;
     justify-content: space-around;
 
-    .imagen_login {
-        width: 40%;
+    .custom_user {
+        width: 10%;
     }
 
     ion-card-header {
         ion-card-subtitle {
             font-size: x-large;
-            color: global.$color-primario;
+            color: black;
         }
 
         ion-card-title {
-            font-size: x-large;
-            color: global.$color-primario;
+            font-size: large;
+            color: black;
         }
     }
 
@@ -38,9 +38,20 @@ ion-card {
         --background: none;
 
         ion-label {
-            font-size: large;
+            font-size: medium;
             font-weight: bold;
+            color: black;
+            margin-top: -4%;
         }
+
+        ion-input {
+            color: black;
+            font-size: small;
+        }
+    }
+
+    ion-button {
+        color: black;
     }
 
     a {
@@ -48,6 +59,7 @@ ion-card {
         font-size: large;
         font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
+        color: black;
     }
 }
 

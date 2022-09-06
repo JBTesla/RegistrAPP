@@ -41,7 +41,6 @@ export class UserService {
   //métodos del CRUD:
   recuperarPass(usuario): boolean{
     if ( this.obtenerUsuario(usuario.email) == undefined ) {
-      this.usuarios.push(usuario);
       return true;
     }
     return false;
@@ -75,6 +74,9 @@ export class UserService {
   //validar rut y contraseña: método que recibe rut y password y me entrega un JSON de un usuario
   validarRutPassword(rut, pass){
     return this.usuarios.find(u => u.rut == rut && u.password == pass);
+  }
+  validarCorreo(email){
+    return this.usuarios.find(u => u.email == email);
   }
 
 }

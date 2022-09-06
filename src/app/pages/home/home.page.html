@@ -1,12 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Home
     </ion-title>
-    <ion-button slot="end" routerLink="/login">CERRAR SESION</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-</ion-content>
+  <div class="fondo">
+    <ion-card>
+      <ion-card-content>
+        <img src="../../../assets/img/logo-duoc.png" alt="imagen_login" class="imagen_login"/>
+        <h1 style="color: black; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Bienvenid@ a RegistrAPP!!</h1>
+        <ion-button routerLink='/login'>Ir a Login</ion-button>
+        <ion-button routerLink='/registrar'>Ir a Registrar</ion-button>
+      </ion-card-content>
+      </ion-card>

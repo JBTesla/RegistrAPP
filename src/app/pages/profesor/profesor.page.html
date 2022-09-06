@@ -1,9 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profesor</ion-title>
+    <ion-title>Perfil Profesor</ion-title>
+    <ion-button slot="end" routerLink="/login">CERRAR SESION</ion-button>
   </ion-toolbar>
 </ion-header>
+<ion-content [fullscreen]="true">
+  <div class="fondo">
+    <ion-card>
+    <ion-card-header>
+      <img src="../../../assets/img/perfil_profesor.png" alt="perfil_profesor" class="perfil_profesor"/>
+    </ion-card-header>
+    <ion-card-content>
+    <ion-button (click)="login()">Ver notas</ion-button>
+    <ion-button (click)="login()">Modificar asistencia</ion-button>
+        
 
-<ion-content>
+    </ion-card-content>
+    </ion-card>
 
+</div>
 </ion-content>
