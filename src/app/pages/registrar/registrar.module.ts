@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RutModule } from 'rut-chileno';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -14,7 +15,9 @@ import { RegistrarPage } from './registrar.page';
     FormsModule,
     IonicModule,
     RegistrarPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RutModule
+
   ],
   declarations: [RegistrarPage]
 })

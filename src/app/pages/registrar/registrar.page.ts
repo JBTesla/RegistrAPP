@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RutService } from 'rut-chileno';
 import { UserService } from 'src/app/services/user.service';
-
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registrar',
@@ -26,7 +27,7 @@ export class RegistrarPage implements OnInit {
   //usuarios: any[] = [];
   verificar_password: string;
 
-  constructor(private usuarioService: UserService, private router: Router) { }
+  constructor(private usuarioService: UserService, private router: Router ,private rutService: RutService,private alertController: AlertController) { }
 
   ngOnInit() {
     //this.usuarios = this.usuarioService.obtenerUsuarios();

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-administrador',
@@ -35,7 +36,7 @@ export class AdministradorPage implements OnInit {
   usuarios: any[] = [];
   verificar_password: string;
 
-  constructor(private usuarioService: UserService ){}
+  constructor(private usuarioService: UserService,private alertController: AlertController ){}
 
   ngOnInit() {
     this.usuarios = this.usuarioService.obtenerUsuarios();
@@ -79,5 +80,6 @@ export class AdministradorPage implements OnInit {
     this.alumno.reset();
     this.verificar_password = '';
   }
+  
 
 }
