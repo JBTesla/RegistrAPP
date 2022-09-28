@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { AlertController } from '@ionic/angular';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-administrador',
@@ -31,11 +32,30 @@ export class AdministradorPage implements OnInit {
     tipo_usuario: new FormControl('this.tipoUser')
   });
 
+ //variables validador rut
+ esValido: boolean;
+ rut: string;
+
+//variables validador fecha nacimiento 
+ fec_nac: Date;
+ edadMinima: number=17;
+ fechaMax: any;
+ fechaHoy: any;
+ edad: number;
 
   usuarios: any[] = [];
   verificar_password: string;
 
-  constructor(private usuarioService: UserService,private alertController: AlertController ){}
+  constructor(private usuarioService: UserService,private alertController: AlertController ){
+
+    var timeDiff = Date.now()-(this.edadMinima)*365.25*24*3600*1000;
+    var fecha= new Date();
+    fecha.setTime(timeDiff);
+
+    this.fechaMax = new DatePipe('en-US').transform(fecha, 'yyyy-MM-dd');
+    
+    this.fechaHoy = new DatePipe('en-US').transform(Date.now()+1,'yyyy-MM-dd');
+  }
 
   ngOnInit() {
     this.usuarios = this.usuarioService.obtenerUsuarios();
@@ -78,6 +98,51 @@ export class AdministradorPage implements OnInit {
   limpiar(){
     this.alumno.reset();
     this.verificar_password = '';
+  }
+
+  calcularEdad() {
+    var fn = new Date(this.fec_nac);
+    var diferencia_fechas = Math.abs(Date.now() - fn.getTime());
+    this.edad = Math.floor((diferencia_fechas / (1000 * 3600 * 24)) / 365.25);
+  }
+  calcularEdadRetorno() {
+    var fn = new Date(this.fec_nac);
+    var timeDiff = Math.abs(Date.now() - fn.getTime());
+    var edadAlumno = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
+    if (edadAlumno >= 17) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  validarRut() {
+    var rutSimple= this.rut.replace('.','').replace('.','').replace('-','');
+    rutSimple = rutSimple.substring(0, rutSimple.length-1);
+    var rutArreglo: any[] = rutSimple.split('').reverse();
+
+    var acumulador: number = 0;
+    var multiplo: number = 2;
+    for(let digito of rutArreglo){
+      acumulador = acumulador + digito * multiplo;
+      multiplo++;
+      if (multiplo>7) {
+        multiplo = 2;
+      }
+    }
+    var resto: number = acumulador%11;
+    var dvCalculado: any = 11 - resto;
+    if (dvCalculado >= 11) {
+      dvCalculado = '0';
+    }else if(dvCalculado == 10){
+      dvCalculado = 'K';
+    }
+    
+    var dvRut: string = this.rut.substring(this.rut.length-1).toUpperCase();
+    if (dvRut == dvCalculado.toString()) {
+      this.esValido = true;
+    }else{
+      this.esValido = false;
+    }
   }
   
 

@@ -8,12 +8,15 @@ import { ProfesorPageRoutingModule } from './profesor-routing.module';
 
 import { ProfesorPage } from './profesor.page';
 
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfesorPageRoutingModule
+    ProfesorPageRoutingModule,
+    NgxQRCodeModule
   ],
   declarations: [ProfesorPage]
 })

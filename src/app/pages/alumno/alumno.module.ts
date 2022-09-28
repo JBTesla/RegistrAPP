@@ -6,6 +6,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { AlumnoPageRoutingModule } from './alumno-routing.module';
 
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+
+
 import { AlumnoPage } from './alumno.page';
 
 @NgModule({
@@ -13,7 +16,8 @@ import { AlumnoPage } from './alumno.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AlumnoPageRoutingModule
+    AlumnoPageRoutingModule,
+    NgxQRCodeModule
   ],
   declarations: [AlumnoPage]
 })

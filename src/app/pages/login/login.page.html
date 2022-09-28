@@ -1,34 +1,37 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>login</ion-title>
-    <ion-button slot="end" routerLink="/home">
-      <ion-icon name="log-in-outline"></ion-icon>
-      Volver a home
-    </ion-button>
+    <ion-title>
+      Aplicación móvil
+    </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <div class="fondo">
+
+<ion-content [fullscreen]="true">
+
+  <form [formGroup]="usuario" (ngSubmit)="ingresar()">
     <ion-card>
       <img src="../../../assets/img/logo-duoc.png" alt="imagen_login" class="imagen_login"/>
-      <img src="../../../assets/img/usuario.png" alt="imagen_login" class="imagen_login"/>
+      <img src="../../../assets/img/custom_user.png" style="width: 100px;"/>
       <ion-card-header>
-        <ion-card-subtitle>INGRESAR</ion-card-subtitle>
-        <ion-card-title>RegistrAPP</ion-card-title>
+        <ion-title>LOGIN</ion-title>
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <ion-label>Usuario</ion-label>
-          <ion-input type="text" placeholder="Ingrese usuario" [(ngModel)]="user"></ion-input>
+          <ion-label position="stacked">Correo</ion-label>
+          <ion-input formControlName="email" type="text" placeholder="Ingrese correo"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Contraseña</ion-label>
-          <ion-input type="password" placeholder="Ingrese contraseña" [(ngModel)]="password"></ion-input>
+          <ion-label position="stacked">Contraseña</ion-label>
+          <ion-input formControlName="password" type="password" placeholder="Ingrese clave"></ion-input>
         </ion-item>
-        <ion-button (click)="login()">INGRESAR</ion-button>
+        <ion-button type="submit" expand="full" [disabled]="!usuario.valid">Ingresar</ion-button>
       </ion-card-content>
-      <a routerLink='/registrar'>Ir a registrar...</a>
-      <a routerLink='/forget-pass'>¿olvidaste tu contraseña?...</a>
+      <ion-item>
+        <a routerLink="/registro">Registrar usuario</a>
+      </ion-item>
+      <ion-item>
+        <a routerLink="/recuperar">Recuperar contraseña</a>
+      </ion-item>
     </ion-card>
-  </div>
+  </form>
 </ion-content>

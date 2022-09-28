@@ -6,6 +6,28 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
+    children:[
+      {
+        path: 'administrador',
+        loadChildren: () => import('../administrador/administrador.module').then(m => m.AdministradorPageModule),
+      },
+      {
+        path: 'alumno',
+        loadChildren: () => import('../alumno/alumno.module').then(m => m.AlumnoPageModule),
+      },
+      {
+        path: 'profesor',
+        loadChildren: () => import('../profesor/profesor.module').then(m => m.ProfesorPageModule),
+      },
+      {
+        path: 'perfil/:rut',
+        loadChildren: () => import('../perfil/perfil.module').then(m => m.PerfilPageModule),
+      },
+      {
+        path: 'map',
+        loadChildren: () => import('../map/map.module').then(m => m.MapPageModule),
+      }
+    ]
   }
 ];
 
