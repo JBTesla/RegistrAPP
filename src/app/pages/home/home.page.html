@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Home</ion-title>
-    <ion-title slot="end">Bienvenido: {{usuario.nombre + ' ' + usuario.ap_paterno}}</ion-title>
+    <ion-title slot="end">Bienvenido: {{usuario.nom_completo}}</ion-title>
     <ion-button slot="end" (click)="logout()">Cerrar sesión</ion-button>
   </ion-toolbar>
 </ion-header>
@@ -14,7 +14,7 @@
       <ion-tab-button tab="administrador" *ngIf="usuario.tipo_usuario == 'administrador'">
         <ion-icon name="file-tray-stacked-outline"></ion-icon>
         <ion-label>Administrar Usuarios</ion-label>
-        <ion-badge>6</ion-badge>
+        <ion-badge>{{cantidad}}</ion-badge>
       </ion-tab-button>
       <ion-tab-button tab="map" *ngIf="usuario.tipo_usuario == 'administrador'">
         <ion-icon name="file-tray-stacked-outline"></ion-icon>

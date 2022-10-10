@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';

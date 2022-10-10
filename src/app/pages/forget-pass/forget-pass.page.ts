@@ -11,11 +11,11 @@ import { UserService } from 'src/app/services/user.service';
 export class ForgetPassPage implements OnInit {
   usuarios: any[] = [];
   email: string;
-
+  KEY_USUARIOS = 'usuario';
   constructor(private toastController: ToastController, private router:Router,private usuarioService: UserService) { }
 
-  ngOnInit() {
-    this.usuarios = this.usuarioService.obtenerUsuarios();
+  async ngOnInit() {
+    this.usuarios = await this.usuarioService.obtenerUsuarios(this.KEY_USUARIOS,);
   }
 
 recuperarPass(){

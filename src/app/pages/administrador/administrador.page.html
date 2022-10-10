@@ -1,7 +1,7 @@
 
 <ion-content [fullscreen]="true">
 
-  <form [formGroup]="alumno" (ngSubmit)="registrar()">
+  <form [formGroup]="usuario" (ngSubmit)="registrar()">
     <ion-item>
       <ion-label position="stacked">Rut</ion-label>
       <ion-input TRIM type="text" placeholder="Ingrese rut" formControlName="rut"></ion-input>
@@ -36,7 +36,7 @@
       <ion-input TRIM type="password" placeholder="Ingrese nuevamente contraseña" [(ngModel)]="verificar_password"
         [ngModelOptions]="{standalone: 'true'}"></ion-input>
     </ion-item>
-    <ion-button type="submit" [disabled]="!alumno.valid">REGISTRAR</ion-button>
+    <ion-button type="submit">REGISTRAR</ion-button>
     <ion-button (click)="modificar()">MODIFICAR</ion-button>
     <ion-button (click)="limpiar()">LIMPIAR</ion-button>
   </form>

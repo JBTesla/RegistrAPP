@@ -16,37 +16,37 @@
       <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: black;">Registrar</h1>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="alumno" (ngSubmit)="registrar()">
+      <!--<form [formGroup]="usuario" (ngSubmit)="registrar()">-->
         <ion-item>
           <ion-label position="stacked">Rut</ion-label>
-          <ion-input TRIM type="text" [(ngModel)]="rut" placeholder="Ingrese rut" formControlName="rut"></ion-input>
+          <ion-input TRIM type="text" [(ngModel)]="usuario.rut" placeholder="Ingrese rut"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Nombre completo</ion-label>
-          <ion-input type="text" placeholder="Ingrese nombre" formControlName="nom_completo"></ion-input>
+          <ion-input type="text" [(ngModel)]="usuario.nom_completo" placeholder="Ingrese nombre" ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">correo electronico</ion-label>
-          <ion-input TRIM type="text" placeholder="Ingrese correo" formControlName="email"></ion-input>
+          <ion-input TRIM type="text" [(ngModel)]="usuario.email" placeholder="Ingrese correo" ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Fecha nacimiento</ion-label>
-          <ion-input TRIM type="date" [(ngModel)]="fec_nac" placeholder="Ingrese fecha nacimiento" formControlName="fecha_nac" max="{{fechaMax}}"></ion-input>
+          <ion-input TRIM type="date" [(ngModel)]="fecha_nac" placeholder="Ingrese fecha nacimiento"  max="{{fechaMax}}"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Semestre</ion-label>
-          <ion-input TRIM type="number" placeholder="Ingrese semestre" formControlName="semestre"></ion-input>
+          <ion-input TRIM type="number" [(ngModel)]="usuario.semestre" placeholder="Ingrese semestre" ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Contraseña</ion-label>
-          <ion-input TRIM type="password" placeholder="Ingrese contraseña" formControlName="password"></ion-input>
+          <ion-input TRIM type="password" [(ngModel)]="usuario.password"placeholder="Ingrese contraseña"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Repita Contraseña</ion-label>
           <ion-input TRIM type="password" placeholder="Ingrese nuevamente contraseña" [(ngModel)]="verificar_password" [ngModelOptions]="{standalone: 'true'}"></ion-input>
         </ion-item>
-        <ion-button type="submit" [disabled]="!alumno.valid">REGISTRAR</ion-button>
-      </form>
+        <ion-button (click)="registrar()" >REGISTRAR </ion-button>
+      <!--</form>-->
     </ion-card-content>
   </ion-card>
 </div>

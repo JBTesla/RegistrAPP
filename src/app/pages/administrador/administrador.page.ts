@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { DatePipe } from '@angular/common';
+import { ValidatorsService } from 'src/app/services/validators.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-administrador',
@@ -22,7 +24,7 @@ export class AdministradorPage implements OnInit {
     tipo_usu:'administrador'
   }];
 
-  alumno = new FormGroup({
+  usuario: any = new FormGroup({
     rut : new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,2}.[0-9]{3}.[0-9]{3}-[0-9kK]{1}')]),
     nom_completo: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('',[Validators.required,Validators.pattern(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@['duocuc'-'profesor.duoc'-'duoc']+(\.cl)$/),Validators.email]),
@@ -31,119 +33,78 @@ export class AdministradorPage implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(18)]),
     tipo_usuario: new FormControl('this.tipoUser')
   });
-
- //variables validador rut
- esValido: boolean;
- rut: string;
-
-//variables validador fecha nacimiento 
- fec_nac: Date;
- edadMinima: number=17;
- fechaMax: any;
- fechaHoy: any;
- edad: number;
-
-  usuarios: any[] = [];
   verificar_password: string;
+  
+  usuarios: any[] = [];
+  KEY_USUARIOS = 'usuarios';
 
-  constructor(private usuarioService: UserService,private alertController: AlertController ){
-
-    var timeDiff = Date.now()-(this.edadMinima)*365.25*24*3600*1000;
-    var fecha= new Date();
-    fecha.setTime(timeDiff);
-
-    this.fechaMax = new DatePipe('en-US').transform(fecha, 'yyyy-MM-dd');
-    
-    this.fechaHoy = new DatePipe('en-US').transform(Date.now()+1,'yyyy-MM-dd');
+  constructor(private usuarioService: UserService,private alertController: AlertController, private loadingCtrl: LoadingController, private validators:ValidatorsService, private router:Router ){
   }
 
-  ngOnInit() {
-    this.usuarios = this.usuarioService.obtenerUsuarios();
+  async ngOnInit() {
+    await this.cargarUsuarios();
   }
 
   //método del formulario
-  registrar(){
-    if (this.alumno.controls.password.value != this.verificar_password) {
-      alert('CONTRASEÑAS NO COINCIDEN!');
-      return;
-    }
-    
-    var registrado: boolean = this.usuarioService.agregarUsuario(this.alumno.value);
-    if (!registrado) {
-      alert('USUARIO YA EXISTE!');
-      return;
-    }
+async cargarUsuarios(){
+  this.usuarios = await this.usuarioService.obtenerUsuarios(this.KEY_USUARIOS);
+}
 
-    alert('ALUMNO REGISTRADO!');
-    this.alumno.reset();
+async registrar() {
+  //validación de salida para buscar un rut válido.
+  if (!this.validators.validarRut(this.usuario.controls.rut.value)) {
+    alert('Rut incorrecto!');
+    return;
+  }
+  //validación de salida para verificar que persona tenga al menos 17 años.
+  if (!this.validators.validarEdadMinima(17, this.usuario.controls.fecha_nac.value)) {
+    alert('Edad mínima 17 años!');
+    return;
+  }
+  //validación de coincidencia de contraseñas.
+  if (this.usuario.controls.password.value != this.verificar_password) {
+    alert('Contraseñas no coinciden!');
+    return;
+  }
+  var respuesta: boolean = await this.usuarioService.agregarUsuario(this.KEY_USUARIOS, this.usuario);
+  if (respuesta) {
+    alert('Usuario registrado!');
+    this.usuario.reset();
     this.verificar_password = '';
+    await this.cargarUsuarios();
+  } else {
+    alert('Usuario ya existe!');
+  }
+}
+
+  async eliminar(rut){
+    await this.usuarioService.eliminarUsuario(this.KEY_USUARIOS, rut);
+    await this.cargando('actualizando usuarios...');
+    await this.cargarUsuarios();
   }
 
-  eliminar(rutEliminar){
-    this.usuarioService.eliminarUsuario(rutEliminar);
+  async buscar(rut){
+    var usuarioEncontrado = await this.usuarioService.obtenerUsuario(this.KEY_USUARIOS, rut);
+    this.usuario.setValue(usuarioEncontrado);
   }
 
-  buscar(rutBuscar){
-    var alumnoEncontrado = this.usuarioService.obtenerUsuario(rutBuscar);
-    this.alumno.setValue(alumnoEncontrado);
-    this.verificar_password = alumnoEncontrado.password;
-  }
-
-  modificar(){
+  async modificar(){
     //console.log(this.alumno.value);
-    this.usuarioService.modificarUsuario(this.alumno.value);
+    this.usuarioService.modificarUsuario(this.KEY_USUARIOS, this.usuario);
+    this.cargando('actualizando usuarios....')
     this.limpiar();
   }
 
   limpiar(){
-    this.alumno.reset();
+    this.usuario.reset();
     this.verificar_password = '';
   }
-
-  calcularEdad() {
-    var fn = new Date(this.fec_nac);
-    var diferencia_fechas = Math.abs(Date.now() - fn.getTime());
-    this.edad = Math.floor((diferencia_fechas / (1000 * 3600 * 24)) / 365.25);
+  async cargando(mensaje){
+    const loading = await this.loadingCtrl.create({
+      message: mensaje,
+      duration: 1000
+    });
+    loading.present();
   }
-  calcularEdadRetorno() {
-    var fn = new Date(this.fec_nac);
-    var timeDiff = Math.abs(Date.now() - fn.getTime());
-    var edadAlumno = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
-    if (edadAlumno >= 17) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  validarRut() {
-    var rutSimple= this.rut.replace('.','').replace('.','').replace('-','');
-    rutSimple = rutSimple.substring(0, rutSimple.length-1);
-    var rutArreglo: any[] = rutSimple.split('').reverse();
-
-    var acumulador: number = 0;
-    var multiplo: number = 2;
-    for(let digito of rutArreglo){
-      acumulador = acumulador + digito * multiplo;
-      multiplo++;
-      if (multiplo>7) {
-        multiplo = 2;
-      }
-    }
-    var resto: number = acumulador%11;
-    var dvCalculado: any = 11 - resto;
-    if (dvCalculado >= 11) {
-      dvCalculado = '0';
-    }else if(dvCalculado == 10){
-      dvCalculado = 'K';
-    }
-    
-    var dvRut: string = this.rut.substring(this.rut.length-1).toUpperCase();
-    if (dvRut == dvCalculado.toString()) {
-      this.esValido = true;
-    }else{
-      this.esValido = false;
-    }
-  }
-  
 
 }
