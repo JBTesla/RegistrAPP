@@ -11,7 +11,7 @@
   <ion-tabs>
     <ion-tab-bar slot="bottom">
       
-      <ion-tab-button tab="administrador" *ngIf="usuario.tipo_usuario == 'administrador'">
+      <ion-tab-button tab="administrador" *ngIf="usuario.tipo_usuario == ''">
         <ion-icon name="file-tray-stacked-outline"></ion-icon>
         <ion-label>Administrar Usuarios</ion-label>
         <ion-badge>{{cantidad}}</ion-badge>

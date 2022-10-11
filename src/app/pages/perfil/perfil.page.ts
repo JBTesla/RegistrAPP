@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 export class PerfilPage implements OnInit {
   rut:string;
   usuario: any;
-  usuarios:any [] =[ ];
+  usuarios:any [] =[];
   KEY_USUARIOS = 'usuarios';
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private userService: UserService) {}

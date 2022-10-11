@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { DatePipe } from '@angular/common';
 import { ValidatorsService } from 'src/app/services/validators.service';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-administrador',
@@ -23,8 +22,17 @@ export class AdministradorPage implements OnInit {
   {
     tipo_usu:'administrador'
   }];
-
-  usuario: any = new FormGroup({
+  usuario : any =
+  {
+      rut : '',
+      email: '',
+      nom_completo:'', 
+      fecha_nac: '',
+      semestre:'',
+      password: '',
+      tipo_usuario:'' 
+  }
+  /*usuario: any = new FormGroup({
     rut : new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,2}.[0-9]{3}.[0-9]{3}-[0-9kK]{1}')]),
     nom_completo: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('',[Validators.required,Validators.pattern(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@['duocuc'-'profesor.duoc'-'duoc']+(\.cl)$/),Validators.email]),
@@ -32,7 +40,7 @@ export class AdministradorPage implements OnInit {
     semestre: new FormControl('', [Validators.required, Validators.min(1), Validators.max(8)]),
     password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(18)]),
     tipo_usuario: new FormControl('this.tipoUser')
-  });
+  });*/
   verificar_password: string;
   
   usuarios: any[] = [];
@@ -52,7 +60,7 @@ async cargarUsuarios(){
 
 async registrar() {
   //validación de salida para buscar un rut válido.
-  if (!this.validators.validarRut(this.usuario.controls.rut.value)) {
+  /*if (!this.validators.validarRut(this.usuario.controls.rut.value)) {
     alert('Rut incorrecto!');
     return;
   }
@@ -65,11 +73,11 @@ async registrar() {
   if (this.usuario.controls.password.value != this.verificar_password) {
     alert('Contraseñas no coinciden!');
     return;
-  }
+  }*/
   var respuesta: boolean = await this.usuarioService.agregarUsuario(this.KEY_USUARIOS, this.usuario);
   if (respuesta) {
     alert('Usuario registrado!');
-    this.usuario.reset();
+    /*this.usuario.reset();*/
     this.verificar_password = '';
     await this.cargarUsuarios();
   } else {
@@ -84,15 +92,17 @@ async registrar() {
   }
 
   async buscar(rut){
-    var usuarioEncontrado = await this.usuarioService.obtenerUsuario(this.KEY_USUARIOS, rut);
-    this.usuario.setValue(usuarioEncontrado);
+    this.usuario = await this.usuarioService.obtenerUsuario(this.KEY_USUARIOS, rut);
+    console.log(this.usuario)
+    //this.usuario.setValue(personaE);
   }
 
   async modificar(){
     //console.log(this.alumno.value);
     this.usuarioService.modificarUsuario(this.KEY_USUARIOS, this.usuario);
     this.cargando('actualizando usuarios....')
-    this.limpiar();
+    //this.limpiar();
+    await this.cargarUsuarios();
   }
 
   limpiar(){
