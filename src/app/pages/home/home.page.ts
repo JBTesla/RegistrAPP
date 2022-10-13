@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 export class HomePage implements OnInit{
 
   //variables de usuario que recibirá los datos que vienen desde login:
+  usuarios: any[]=[]
   usuario: any;
   cantidad: any;
 
@@ -17,6 +18,7 @@ export class HomePage implements OnInit{
 
   ngOnInit(){
     this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
+    console.log(this.usuario)
     this.cantidad = this.userService.cantidadUsuarios();
   }
 

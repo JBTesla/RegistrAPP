@@ -22,7 +22,7 @@ recuperarPass(){
   var validarEmail= this.usuarioService.validarCorreo(this.email)
  if (validarEmail != undefined) {
   if (validarEmail.email == this.email) {
-    alert('Se ah enviado un correo electronico de recuperacion');
+    alert('Se ha enviado un correo electronico de recuperación!');
   }
  }else{
   this.tostadaError();
@@ -31,7 +31,7 @@ recuperarPass(){
   //toast
   async tostadaError() {
     const toast = await this.toastController.create({
-      message: 'Correo no registrado',
+      message: 'Correo no registrado!!',
       duration: 3000
     });
     toast.present();

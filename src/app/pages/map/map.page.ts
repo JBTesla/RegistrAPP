@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Geoposition } from '@ionic-native/geolocation';
+
 
 declare var google;
 
@@ -25,7 +25,7 @@ export class MapPage implements OnInit {
 
   ngOnInit() {
     this.cargarMapa();
-    this.obtenerUbicacion();
+    /* this.obtenerUbicacion(); */
     this.autocompletado(this.map,this.marker);
   }
 
@@ -54,12 +54,12 @@ export class MapPage implements OnInit {
   }
 
   obtenerUbicacion(){
-    navigator.geolocation.getCurrentPosition(
+    /* navigator.geolocation.getCurrentPosition(
       (geoposition: Geoposition) => {
         console.log(geoposition.coords.latitude);
         console.log(geoposition.coords.longitude);
       }
-    );
+    ); */
   }
 
   autocompletado(mapaLocal,marcadorLocal){

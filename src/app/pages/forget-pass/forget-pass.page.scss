@@ -20,7 +20,7 @@ ion-card {
     
 
     .forget_pass {
-        width: 30%;
+        width: 20%;
         
     }
 
@@ -43,7 +43,7 @@ ion-card {
         
 
         ion-label {
-            font-size: medium;
+            font-size: small;
             font-weight: bold;
             color: black;
         }
@@ -51,6 +51,8 @@ ion-card {
         ion-input {
             color: black;
         }
+
+        
     }
 
     a {

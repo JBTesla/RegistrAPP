@@ -9,35 +9,12 @@ import { BehaviorSubject } from 'rxjs';
 export class UserService {
 
   //variables necesarias para el trabajo del CRUD:
-  users: any[] = [{
-    rut: '11.111.111-1',
-    nom_completo: 'Admin',
-    email:'ad.min@duoc.cl',
-    fecha_nac: '1990-05-01',
-    semestre: 1,
-    password: 'admin123',
-    tipo_usuario: 'administrador'
-  },
-  {
-    rut: '11.111.111-2',
-    nom_completo: 'Alumno',
-    email: 'al.mno@duocuc.cl',
-    fecha_nac: '1999-03-03',
-    semestre: 3,
-    password: 'alumno123',
-    tipo_usuario: 'alumno'
-  },
-  {
-    rut: '11.111.111-3',
-    nom_completo: 'Profesor',
-    email: 'pr.ofe@profesor.duoc.cl',
-    fecha_nac: '1980-06-24',
-    semestre: 1,
-    password: 'profesor123',
-    tipo_usuario: 'profesor'
-  }];
+  users: any[] = [];
   user: any;
   isAuthenticated = new BehaviorSubject(false);
+
+  clases: any[]=[];
+  clase: any;
 
   constructor(private router:Router,private storage: Storage) {
     storage.create();
@@ -66,7 +43,7 @@ export class UserService {
   async obtenerUsuario(key, id)
   {
     this.users = await this.storage.get(key) || [];
-    this.user = this.users.find(user => user.rut == id);
+    this.user = await this.users.find(user => user.rut == id);
     return this.user;
   }
 
@@ -90,7 +67,7 @@ export class UserService {
 
   async modificarUsuario(key, dato){
     this.users = await this.storage.get(key) || [];
-    var index =await this.users.findIndex(user => user.rut == dato.rut);
+    var index = this.users.findIndex(user => user.rut == dato.rut);
     this.users[index] = dato;
 
     await this.storage.set(key,this.users);
@@ -102,7 +79,8 @@ export class UserService {
     return this.users.find(u => u.rut == rut && u.password == pass);
   }
   //métodos customer:
-  loginUsuario(email, password) {
+  async loginUsuario(key,email, password) {
+    this.users = await this.storage.get(key) || [];
     var usuarioLogin: any;
     usuarioLogin = this.users.find(user => user.email == email && user.password == password);
     if (usuarioLogin != undefined) {
@@ -125,5 +103,38 @@ export class UserService {
   cantidadUsuarios(): number{
     return this.users.length;
   }
+//metodos para crear clases
+async obtenerClase(key, id)
+  {
+    this.clases = await this.storage.get(key) || [];
+    this.clase = this.users.find(clase => clase.id == id);
+    return this.clase;
+  }
+  async obtenerClases(key): Promise<any[]> {
+    this.clases = await this.storage.get(key);
+    return this.clases;
+  }
+  async obtenerDocente(key, tipo)
+  {
+    this.users = await this.storage.get(key) || [];
+    this.user = this.users.find(user => user.tipo_usuario == tipo);
+    return this.user;
+  }
+  async obtenerDocentes(key): Promise<any[]> {
+    this.users = await this.storage.get(key);
+    return this.users;
+  }
+  async agregarClase(key, clase){
+    this.clases = await this.storage.get(key) || [];
+
+    this.clase = await this.obtenerClase(key, clase.id);
+    if(this.clase == undefined){
+      this.users.push(clase);
+      await this.storage.set(key, this.clases)
+      return true;
+    }
+    return false;
+
+}
 
 }
