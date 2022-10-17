@@ -16,22 +16,28 @@
         <ion-label>Administrar Usuarios</ion-label>
         <ion-badge>{{cantidad}}</ion-badge>
       </ion-tab-button>
-      <ion-tab-button tab="map" *ngIf="usuario.tipo_usuario == 'administrador'">
+      <ion-tab-button tab="map" *ngIf="usuario.tipo_usuario == 'alumno'">
         <ion-icon name="file-tray-stacked-outline"></ion-icon>
         <ion-label>Mapa</ion-label>
         <ion-badge>6</ion-badge>
       </ion-tab-button>
-      <ion-tab-button tab="profesor" *ngIf="usuario.tipo_usuario == 'administrador'">
+      <ion-tab-button tab="profesor/{{usuario.rut}}" *ngIf="usuario.tipo_usuario == 'profesor'">
         <ion-icon name="file-tray-stacked-outline"></ion-icon>
-        <ion-label>escanear qr</ion-label>
+        <ion-label>Crear asistencia QR</ion-label>
         <ion-badge>6</ion-badge>
       </ion-tab-button>
-
+      <ion-tab-button tab="clases" *ngIf="usuario.tipo_usuario == 'administrador'">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <ion-label>crear clases</ion-label>
+      </ion-tab-button>
       <ion-tab-button tab="perfil/{{usuario.rut}}">
         <ion-icon name="person-circle-outline"></ion-icon>
         <ion-label>Perfil</ion-label>
       </ion-tab-button>
-
+      <ion-tab-button tab="alumno" *ngIf="usuario.tipo_usuario == 'alumno' ">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <ion-label>Ingresar QR asistencia</ion-label>
+      </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
 

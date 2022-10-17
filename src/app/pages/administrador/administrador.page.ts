@@ -86,6 +86,7 @@ async registrar() {
 }
 
   async eliminar(rut){
+  
     await this.usuarioService.eliminarUsuario(this.KEY_USUARIOS, rut);
     await this.cargando('actualizando usuarios...');
     await this.cargarUsuarios();

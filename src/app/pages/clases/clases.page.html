@@ -1,9 +1,43 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>clases</ion-title>
+    <ion-title>Clases</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <form [formGroup]="clase" (ngSubmit)="crearClase()">
+    <ion-item>
+      <ion-label position="stacked">cod_clase</ion-label>
+      <ion-input TRIM type="text" placeholder="Ingrese codigo" formControlName="cod_clase"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Nombre clase</ion-label>
+      <ion-input type="text" placeholder="Ingrese nombre clase " formControlName="nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Sigla de la asignatura</ion-label>
+      <ion-input TRIM type="text" placeholder="Ingrese sigla" formControlName="sigla_asignatura"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Semestre</ion-label>
+      <ion-input TRIM type="number" placeholder="ingrese semestre" formControlName="semestre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select placeholder="docente" formControlName="docente">
+        <ion-select-option *ngFor="let d of usuarios" value="{{d.rut}}">{{d.nom_completo}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select placeholder="Horario" formControlName="horario">
+        <ion-select-option *ngFor="let jornada of horario">{{jornada.tipo_horario}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button type="submit">Crear Clase</ion-button>
+  </form>
+  <h1>Lista de clases</h1>
+  <ion-list *ngFor="let clase of clases">
+    <p>{{clase.cod_clase}} - {{clase.nombre}} - {{clase.sigla_asignatura}} - {{clase.semestre}} - {{clase.docente}} - {{clase.horario}}</p>
+<!--     <ion-button color="warning" (click)="buscar(clase.rut)">Buscar</ion-button>
+    <ion-button color="danger" (click)="eliminar(usuario.rut)">Eliminar</ion-button> -->
+  </ion-list>
 </ion-content>

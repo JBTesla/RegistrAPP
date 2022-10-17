@@ -16,19 +16,30 @@ export class ClasesPage implements OnInit {
     },];
 
   clase = new FormGroup({
-    cod_clase: new FormControl('',[]),
-    nombre:new FormControl('',[]),
-    sigla_asignatura: new FormControl('',[]),
-    semestre: new FormControl('',[]),
-    docente:new FormGroup('',[]),
-    horario: new FormGroup('this.horario'),
+    cod_clase: new FormControl(''),
+    nombre:new FormControl('',),
+    sigla_asignatura: new FormControl(''),
+    semestre: new FormControl(''),
+    docente:new FormControl(''),
+    horario: new FormControl('this.horario'),
   });
   clases: any[]=[];
   KEY_CLASES ='clases';
+
+  //docente: any;
+  usuarios: any[]=[];
+  KEY_USUARIOS='usuarios';
+
+
   constructor(private usuarioService: UserService) { }
 
   async ngOnInit() {
+    await this.cargarDocentes();
     await this.cargarClases();
+  }
+  async cargarDocentes()
+  {
+    this.usuarios = await this.usuarioService.obtenerDocentes(this.KEY_USUARIOS);
   }
 
   async cargarClases(){
@@ -39,9 +50,11 @@ export class ClasesPage implements OnInit {
   if (respuesta) {
     alert('clase creada!');
     await this.cargarClases();
+    await this.cargarDocentes();
   } else {
+    /* console.log(respuesta) */
     alert('clase ya existe!');
   }
-  } 
+  }
 }
 

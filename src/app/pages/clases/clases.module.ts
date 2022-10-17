@@ -16,7 +16,7 @@ import { InputTrimModule } from 'ng2-trim-directive';
     IonicModule,
     ClasesPageRoutingModule,
     ReactiveFormsModule,
-    InputTrimModule,
+    InputTrimModule
   ],
   declarations: [ClasesPage]
 })

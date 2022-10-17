@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlumnoPage implements OnInit {
 
-  constructor() { }
+  constructor(private userService:UserService) { }
 
-  ngOnInit() {
+  clases:any[]=[];
+  clase: any;
+  KEY_CLASES = 'clases'
+
+  async ngOnInit() {
+    await this.cargarClases;
   }
 
+async cargarClases(){
+  this.clases = await this.userService.obtenerClases(this.KEY_CLASES);
+}
 }

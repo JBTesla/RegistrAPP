@@ -9,12 +9,16 @@ import { BehaviorSubject } from 'rxjs';
 export class UserService {
 
   //variables necesarias para el trabajo del CRUD:
-  users: any[] = [];
+  users: any[]=[];
   user: any;
   isAuthenticated = new BehaviorSubject(false);
 
   clases: any[]=[];
   clase: any;
+
+  asistencias: any[]=[];
+  asistencia: any;
+  
 
   constructor(private router:Router,private storage: Storage) {
     storage.create();
@@ -52,14 +56,14 @@ export class UserService {
     return this.users;
   }
 
-  async eliminarUsuario(key, user){
+  async eliminarUsuario(key, rut){
     this.users = await this.storage.get(key) || [];
     //if(this.usuarios.length == 0){
       //return
     //}
     this.users.forEach((value, index) => {
-      if (value.rut == user) {
-        this.users.slice(index, 1);
+      if (value.rut == rut) {
+        this.users.splice(index, 1);
       }
     });
     await this.storage.set(key, this.users);
@@ -104,37 +108,59 @@ export class UserService {
     return this.users.length;
   }
 //metodos para crear clases
-async obtenerClase(key, id)
+async obtenerClase(key, cod_clase )
   {
+    console.log(cod_clase)
     this.clases = await this.storage.get(key) || [];
-    this.clase = this.users.find(clase => clase.id == id);
+    this.clase = await this.clases.find(clase => clase.cod_clase == cod_clase);
     return this.clase;
   }
   async obtenerClases(key): Promise<any[]> {
     this.clases = await this.storage.get(key);
     return this.clases;
   }
-  async obtenerDocente(key, tipo)
+  async obtenerDocente(key)
   {
     this.users = await this.storage.get(key) || [];
-    this.user = this.users.find(user => user.tipo_usuario == tipo);
+    this.user = this.users.find(user => user.tipo_usuario == 'profesor');
     return this.user;
   }
   async obtenerDocentes(key): Promise<any[]> {
-    this.users = await this.storage.get(key);
+    this.users = await this.storage.get(key) || [];
+    this.users = await this.users.filter(u => u.tipo_usuario == 'profesor');
+    console.log(this.users)
     return this.users;
   }
   async agregarClase(key, clase){
     this.clases = await this.storage.get(key) || [];
-
-    this.clase = await this.obtenerClase(key, clase.id);
+    this.clase = await this.obtenerClase(key, clase.cod_clase);
     if(this.clase == undefined){
-      this.users.push(clase);
+      this.clases.push(clase);
       await this.storage.set(key, this.clases)
       return true;
     }
     return false;
-
 }
+  async obtenerClaseDocente(key, rut){
+    this.clases = await this.storage.get(key) || [];
+    this.clases = this.clases.filter(clase => clase.docente == rut)
+    return this.clases;
+  }
+  async obtenerAsistencia(key, cod_asistencia){
+    this.asistencias = await this.storage.get(key) || [];
+    this.asistencia = await this.asistencias.find(a => a.cod_asistencia == cod_asistencia);
+    return this.asistencia;
+  }
 
+  async agregarAsistencia(key, asistencia){
+    this.asistencias = await this.storage.get(key) || [];
+    this.asistencia = await this.obtenerAsistencia(key, asistencia.cod_asistencia);
+    if(this.asistencia == undefined)
+    {
+      this.asistencias.push(asistencia);
+      await this.storage.set(key, this.asistencias)
+      return true;
+    }
+    return false;
+  }
 }
