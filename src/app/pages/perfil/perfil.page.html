@@ -1,5 +1,6 @@
 <ion-content>
 
-  <h1>rut: {{rut}}</h1>
-
+  <h1>rut: {{usuario.rut}}</h1>
+  <h1>Nombre: {{usuario.nom_completo}}</h1>
+  <h1 *ngIf="usuario.tipo_usuario == 'alumno'">Semestre: {{usuario.semestre}}</h1>
 </ion-content>

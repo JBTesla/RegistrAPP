@@ -12,7 +12,7 @@ const routes: Routes = [
         loadChildren: () => import('../administrador/administrador.module').then(m => m.AdministradorPageModule),
       },
       {
-        path: 'alumno',
+        path: 'alumno/:rut',
         loadChildren: () => import('../alumno/alumno.module').then(m => m.AlumnoPageModule),
       },
       {

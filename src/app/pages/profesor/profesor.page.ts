@@ -46,11 +46,11 @@ export class ProfesorPage implements OnInit {
   }
   async generarCodigo(cod_clase){
 /*     this.clases = await this.userService.obtenerClaseDocente(this.KEY_CLASES, rut); */
-    this.contador = '1'
+    this.contador = await this.userService.idClase(this.KEY_ASISTENCIAS)
     this.asistencia={
       cod_asistencia: this.contador,
       cod_clase: cod_clase,
-      alumnos:{}
+      alumnos:[]
     }
     console.log(cod_clase)
     console.log(this.contador)
@@ -59,9 +59,8 @@ export class ProfesorPage implements OnInit {
       alert('asistencia generada Escamear QR para quedar presente')
       await this.cargarClase();
       await this.cargarDocentes();
-      this.contador += '1';
       if (this.value == '') {
-        this.value = cod_clase;
+        this.value = JSON.stringify(this.contador);
       }
       console.log(respuesta)
     }else{

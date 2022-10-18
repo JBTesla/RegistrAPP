@@ -151,6 +151,10 @@ async obtenerClase(key, cod_clase )
     this.asistencia = await this.asistencias.find(a => a.cod_asistencia == cod_asistencia);
     return this.asistencia;
   }
+  async obtenerAsistencias(key): Promise<any[]> {
+    this.asistencias = await this.storage.get(key) || [];
+    return this.asistencias;
+  }
 
   async agregarAsistencia(key, asistencia){
     this.asistencias = await this.storage.get(key) || [];
@@ -162,5 +166,26 @@ async obtenerClase(key, cod_clase )
       return true;
     }
     return false;
+  }
+  async ingresarAsistencia(key, cod_asistencia,rut){
+    this.asistencias = await this.storage.get(key) || [];
+    
+    let index = this.asistencias.findIndex(a => a.cod_asistencia == cod_asistencia);
+    console.log(this.asistencias[index].alumnos);
+    this.asistencias[index].alumnos.push(rut);
+    console.log(this.asistencias[index].alumnos);
+    /* var asistenciaACT = this.asistencia.alumnos.push(rut); */
+  /*   console.log(asistenciaACT) */
+    //this.asistencias[index]=this.asistencias[index].alumnos.push(rut);
+    //console.log(this.asistencias)
+    await this.storage.set(key, this.asistencias);
+  }
+  async idClase(key){
+    this.asistencias = await this.storage.get(key) || [];
+    var id = 0
+  for (let index = 0; index < this.asistencias.length; index++) {
+      id = this.asistencias[index].cod_asistencia;
+    }
+    return id+1
   }
 }

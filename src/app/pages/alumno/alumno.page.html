@@ -5,5 +5,11 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-
+  <ion-item>
+    <ion-label>Ingresar Codigo QR:
+    </ion-label>
+    <ion-input [(ngModel)]="Qrcode"TRIM type="text" placeholder="ingrese codigo QR">
+    </ion-input>
+    <ion-button expand="block" (click)="ingresarAsistencia()">Iniciar clase</ion-button>
+  </ion-item>
 </ion-content>
