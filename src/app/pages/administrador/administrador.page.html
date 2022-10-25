@@ -1,6 +1,6 @@
 
 <ion-content [fullscreen]="true">
-
+  <img src="/../assets/img/logo-duoc.png">
   <form [formGroup]="usuario" (ngSubmit)="registrar()">
     <ion-item>
       <ion-label position="stacked">Rut</ion-label>
@@ -24,7 +24,7 @@
       <ion-input TRIM type="date" placeholder="Ingrese fecha nacimiento" formControlName="fecha_nac"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Semestre</ion-label>
+      <ion-label  position="stacked">Semestre</ion-label>
       <ion-input TRIM type="number" placeholder="Ingrese semestre" formControlName="semestre"></ion-input>
     </ion-item>
     <ion-item>
@@ -36,16 +36,22 @@
       <ion-input TRIM type="password" placeholder="Ingrese nuevamente contraseña" [(ngModel)]="verificar_password"
         [ngModelOptions]="{standalone: 'true'}"></ion-input>
     </ion-item>
+    <ion-card>
     <ion-button type="submit">REGISTRAR</ion-button>
     <ion-button (click)="modificar()">MODIFICAR</ion-button>
     <ion-button (click)="limpiar()">LIMPIAR</ion-button>
+    </ion-card>
   </form>
-
-  <h1>LISTA DE USUARIOS</h1>
+  <h3>LISTA DE USUARIOS</h3>
   <ion-list *ngFor="let usuario of usuarios">
-    <p>{{usuario.rut}} - {{usuario.nom_completo}} - {{usuario.fecha_nac}} - {{usuario.semestre}}</p>
-    <ion-button color="warning" (click)="buscar(usuario.rut)">Buscar</ion-button>
-    <ion-button color="danger" (click)="eliminar(usuario.rut)">Eliminar</ion-button>
+    <ion-card>
+    <p>Rut: {{usuario.rut}}</p>
+    <p>Nombre: {{usuario.nom_completo}}</p>  
+    <p>Fecha Nac: {{usuario.fecha_nac}}</p> 
+    <p *ngIf="usuario.tipo_usuario == 'alumno'">Semestre: {{usuario.semestre}}</p>
+    <p *ngIf="usuario.tipo_usuario == 'administrador'">Privilegios: {{usuario.tipo_usuario}}</p>
+    <p><ion-button color="warning" (click)="buscar(usuario.rut)">Buscar</ion-button> <ion-button color="danger" (click)="eliminar(usuario.rut)">Eliminar</ion-button></p>
+  </ion-card>
   </ion-list>
 
 </ion-content>

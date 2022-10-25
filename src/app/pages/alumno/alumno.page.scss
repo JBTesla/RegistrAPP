@@ -1,6 +1,6 @@
 .fondo {
-    height: 100vh;
-    background-image: url("../../..//assets/img/fondo_duoc.jpg");
+    height: 80vh;
+    background-image: url("../../../assets/img/background.jpg");
     background-size: cover;
     text-align: center;
   }
@@ -9,8 +9,8 @@
     --background: linear-gradient(#5adadf, #e2e3ee);
     margin: 0 auto;
     top: 5vh;
-    height: 70vh;
-    width: 70vw;
+    height: 250px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;

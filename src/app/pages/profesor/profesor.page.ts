@@ -56,7 +56,7 @@ export class ProfesorPage implements OnInit {
     console.log(this.contador)
     var respuesta: boolean = await this.userService.agregarAsistencia(this.KEY_ASISTENCIAS, this.asistencia );
     if(respuesta){
-      alert('asistencia generada Escamear QR para quedar presente')
+      alert('asistencia generada Escanear QR para quedar presente!')
       await this.cargarClase();
       await this.cargarDocentes();
       if (this.value == '') {
@@ -64,7 +64,7 @@ export class ProfesorPage implements OnInit {
       }
       console.log(respuesta)
     }else{
-      alert('la asistencia de hoy ya esta creada!')
+      alert('la asistencia de hoy ya está creada!')
       console.log(respuesta)
       console.log(this.asistencia)
     }

@@ -76,7 +76,7 @@ export class LoginPage implements OnInit {
       };
 
       //PARA ENVIAR EL DATO QUE ESTA LISTO, SE ANEXA AL ROUTER!
-      this.router.navigate(['/home'], navigationExtras);
+      this.router.navigate(['/home/bienvenido'], navigationExtras);
 
     } else {
       alert('Usuario o contraseña incorrectos!')

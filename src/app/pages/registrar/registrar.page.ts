@@ -70,7 +70,7 @@ export class RegistrarPage implements OnInit {
     var respuesta: boolean = await this.userService.agregarUsuario(this.KEY_USUARIOS, this.usuario.value);
     if (respuesta) {
       alert('Usuario registrado!');
-      /*this.usuario.reset();*/
+      this.usuario.reset();
       this.verificar_password = '';
       this.router.navigate(['/login']);
       /*console.log(respuesta)*/

@@ -13,13 +13,16 @@ export class PerfilPage implements OnInit {
   usuarios:any [] =[];
   KEY_USUARIOS = 'usuarios';
 
+  clase: any = {};
+  clases:any [] =[];
+  KEY_CLASES = 'clases';
+
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private userService: UserService) {}
 
   async ngOnInit() {
   this.rut = this.activatedRoute.snapshot.paramMap.get('rut');
-  console.log(this.rut);
+  this.clase = await this.userService.obtenerClaseDocente(this.KEY_CLASES, this.rut);
   this.usuario = await this.userService.obtenerUsuario(this.KEY_USUARIOS, this.rut);
-  console.table(this.usuario);
   }
 
 }

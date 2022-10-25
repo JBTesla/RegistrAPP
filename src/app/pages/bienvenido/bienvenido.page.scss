@@ -1,26 +1,29 @@
 .fondo {
-    height: 80vh;
-    background-image: url("../../..//assets/img/background.jpg");
+    height: 77vh;
+    background-image: url("../../../assets/img/background.jpg");
+    background-size: cover;
+    text-align: center;
+  }
+  .logo{
+    margin-top: auto;
     background-size: cover;
     text-align: center;
   }
   
   ion-card {
-    --background: linear-gradient(#235f61, #010108);
+    --background: linear-gradient(rgb(15, 106, 110), #e2e3ee);
     margin: 0 auto;
-    top: 5vh;
-    height: 70vh;
-    width: 70vw;
+
+    height: 250px;
+    width: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
   
+    
     .imagen_login {
-      width: 45%;
-  }
-    .perfil_profesor {
-    width: 30%;
+    width: 60%;
     margin-top: 2%;
     }
   

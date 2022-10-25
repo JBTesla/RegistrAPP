@@ -1,15 +1,17 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title></ion-title>
-    <ion-button slot="end" routerLink="/home">Volver Home</ion-button>
-  </ion-toolbar>
+  
 </ion-header>
 <ion-content [fullscreen]="true">
-  <ion-item>
-    <ion-label>Ingresar Codigo QR:
-    </ion-label>
-    <ion-input [(ngModel)]="Qrcode"TRIM type="text" placeholder="ingrese codigo QR">
-    </ion-input>
-    <ion-button expand="block" (click)="ingresarAsistencia()">Iniciar clase</ion-button>
-  </ion-item>
+  <div class="fondo">
+    <ion-card>
+    <img src="../../../assets/img/qrcode.png" style="width: 45px;"/>
+    <ion-card-content>
+    <ion-item>
+    <ion-label position="stacked">Ingresar Codigo QR:</ion-label>
+    <ion-input [(ngModel)]="Qrcode"TRIM type="text" placeholder="ingrese codigo QR"></ion-input>
+    </ion-item>  
+    <ion-button expand="block" (click)="ingresarAsistencia()">Ingresar codigo</ion-button>
+  </ion-card-content>
+  </ion-card>
+  </div>
 </ion-content>

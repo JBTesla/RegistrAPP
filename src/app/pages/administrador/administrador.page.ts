@@ -77,7 +77,7 @@ async registrar() {
   var respuesta: boolean = await this.usuarioService.agregarUsuario(this.KEY_USUARIOS, this.usuario.value);
   if (respuesta) {
     alert('Usuario registrado!');
-    /*this.usuario.reset();*/
+    this.usuario.reset();
     this.verificar_password = '';
     await this.cargarUsuarios();
   } else {
@@ -101,9 +101,9 @@ async registrar() {
 
   async modificar(){
     //console.log(this.alumno.value);
-    this.usuarioService.modificarUsuario(this.KEY_USUARIOS, this.usuario.value);
+    await this.usuarioService.modificarUsuario(this.KEY_USUARIOS, this.usuario.value);
     this.cargando('actualizando usuarios....')
-    //this.limpiar();
+    this.limpiar();
     await this.cargarUsuarios();
   }
 

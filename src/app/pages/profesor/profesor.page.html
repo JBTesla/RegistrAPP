@@ -1,19 +1,19 @@
 <ion-content>
-
-  <ngx-qrcode [elementType]="elementType" [value]="value"></ngx-qrcode>
-
-  <ion-item>
+  <div class="fondo">
+    <ion-card>
+    <ngx-qrcode [elementType]="elementType" [value]="value"></ngx-qrcode>
 <!--     <ion-select placeholder="tipo de usuario">
       <ion-select-option *ngFor="let d of clases">{{d.docente}}</ion-select-option>
     </ion-select>
     <ion-select placeholder="tipo de usuario">
       <ion-select-option *ngFor="let d of clases">{{d.cod_clase}}</ion-select-option>
     </ion-select> -->
-
-  </ion-item>
-  <ion-input placeholder="Ingrese valor para el QR" [(ngModel)]="value" disabled="true"></ion-input>
+  <ion-card-content>
+  <ion-input [(ngModel)]="value" disabled="true" style="color: white; font-weight:400;"></ion-input>
   <ion-button *ngFor="let d of clases"  expand="full" (click)=" generarCodigo(d.cod_clase)">Iniciar clase</ion-button>
 <!--   <ion-input placeholder="Ingrese valor para el QR" [(ngModel)]="value" disabled="true"></ion-input> -->
 <!--   <ion-button expand="full" (click)="generarCodigo()">Iniciar clase</ion-button> -->
-
+  </ion-card-content>  
+  </ion-card>
+  </div>
 </ion-content>

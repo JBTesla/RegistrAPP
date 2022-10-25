@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { LoadingController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -31,7 +32,7 @@ export class ClasesPage implements OnInit {
   KEY_USUARIOS='usuarios';
 
 
-  constructor(private usuarioService: UserService) { }
+  constructor(private usuarioService: UserService,private loadingCtrl: LoadingController) { }
 
   async ngOnInit() {
     await this.cargarDocentes();
@@ -55,6 +56,32 @@ export class ClasesPage implements OnInit {
     /* console.log(respuesta) */
     alert('clase ya existe!');
   }
+  }
+  async eliminarClase(cod_clase){
+    await this.usuarioService.eliminarClass(this.KEY_CLASES, cod_clase);
+    this.cargando('actualizando clases...');
+    await this.cargarClases();
+  }
+  async buscarClase(cod_clase){
+    var claseEncontrada = await this.usuarioService.obtenerClase(this.KEY_CLASES,cod_clase);
+    this.clase.setValue(claseEncontrada);
+  }
+  async modificarClase(){
+    await this.usuarioService.modificarClass(this.KEY_CLASES, this.clase.value);
+    this.cargando('actualizando clases....')
+    this.limpiar();
+    await this.cargarClases();
+  }
+
+  limpiar(){
+    this.clase.reset();
+  }
+  async cargando(mensaje){
+    const loading = await this.loadingCtrl.create({
+      message: mensaje,
+      duration: 1000
+    });
+    loading.present();
   }
 }
 

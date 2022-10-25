@@ -119,6 +119,9 @@ async obtenerClase(key, cod_clase )
     this.clases = await this.storage.get(key);
     return this.clases;
   }
+  cantidadClases(): number{
+    return this.clases.length;
+  }
   async obtenerDocente(key)
   {
     this.users = await this.storage.get(key) || [];
@@ -141,9 +144,28 @@ async obtenerClase(key, cod_clase )
     }
     return false;
 }
+async eliminarClass(key, cod){
+  this.clases = await this.storage.get(key) || [];
+    //if(this.usuarios.length == 0){
+      //return
+    //}
+    this.clases.forEach((value, index) => {
+      if (value.cod_clase == cod) {
+        this.clases.splice(index, 1);
+      }
+    });
+    await this.storage.set(key, this.clases);
+}
+async modificarClass(key, claseU){
+  this.clases = await this.storage.get(key) || [];
+  var index = this.clases.findIndex(clase => clase.cod_clase == claseU.cod_clase);
+  this.clases[index] = claseU;
+
+  await this.storage.set(key,this.clases);
+}
   async obtenerClaseDocente(key, rut){
     this.clases = await this.storage.get(key) || [];
-    this.clases = this.clases.filter(clase => clase.docente == rut)
+    this.clases = this.clases.find(clase => clase.docente == rut)
     return this.clases;
   }
   async obtenerAsistencia(key, cod_asistencia){
