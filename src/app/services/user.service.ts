@@ -122,6 +122,7 @@ async obtenerClase(key, cod_clase )
   cantidadClases(): number{
     return this.clases.length;
   }
+
   async obtenerDocente(key)
   {
     this.users = await this.storage.get(key) || [];
@@ -165,7 +166,7 @@ async modificarClass(key, claseU){
 }
   async obtenerClaseDocente(key, rut){
     this.clases = await this.storage.get(key) || [];
-    this.clases = this.clases.find(clase => clase.docente == rut)
+    this.clases = await this.clases.find(clase => clase.docente == rut)
     return this.clases;
   }
   async obtenerAsistencia(key, cod_asistencia){

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
-import { v4 } from 'uuid';
+
 
 @Component({
   selector: 'app-profesor',
@@ -14,26 +15,27 @@ export class ProfesorPage implements OnInit {
   elementType = 'canvas';
   value = '';
   //variables para docentes
-  docentes: any[]=[];
+  docentes:any[]=[];
   docente: any;
-  KEY_DOCENTES= 'docentes'
+  KEY_DOCENTES='docentes'
   //variobles para clases
   clases: any[]=[];
-  clase: any;
+  clase: any={};
   KEY_CLASES='clases';
 
   asistencias:any[]=[];
 
   asistencia: any;
-  KEY_ASISTENCIAS='asistencias'
+  KEY_ASISTENCIAS='asistencias';
 
   contador:any;
   rut: string;
-  constructor(private userService:UserService,private activatedRoute: ActivatedRoute) { }
+  constructor(private userService:UserService,private activatedRoute: ActivatedRoute, private loadingCtrl: LoadingController){}
 
   async ngOnInit() {
     this.rut = this.activatedRoute.snapshot.paramMap.get('rut');
     await this.cargarClase();
+    this.clase = await this.userService.obtenerClaseDocente(this.KEY_CLASES, this.rut);
     await this.cargarDocentes();
   }
 
@@ -43,8 +45,10 @@ export class ProfesorPage implements OnInit {
   }
   async cargarClase(){
     this.clases = await this.userService.obtenerClaseDocente(this.KEY_CLASES, this.rut);
+    console.log(this.clases)
   }
   async generarCodigo(cod_clase){
+    console.log(cod_clase)
 /*     this.clases = await this.userService.obtenerClaseDocente(this.KEY_CLASES, rut); */
     this.contador = await this.userService.idClase(this.KEY_ASISTENCIAS)
     this.asistencia={
@@ -54,9 +58,9 @@ export class ProfesorPage implements OnInit {
     }
     console.log(cod_clase)
     console.log(this.contador)
-    var respuesta: boolean = await this.userService.agregarAsistencia(this.KEY_ASISTENCIAS, this.asistencia );
+    var respuesta: boolean = await this.userService.agregarAsistencia(this.KEY_ASISTENCIAS, this.asistencia);
     if(respuesta){
-      alert('asistencia generada Escanear QR para quedar presente!')
+      await this.cargando('Creando asistencia...');
       await this.cargarClase();
       await this.cargarDocentes();
       if (this.value == '') {
@@ -68,5 +72,12 @@ export class ProfesorPage implements OnInit {
       console.log(respuesta)
       console.log(this.asistencia)
     }
+  }
+  async cargando(mensaje){
+    const loading = await this.loadingCtrl.create({
+      message: mensaje,
+      duration: 1000
+    });
+    loading.present();
   }
 }

@@ -1,6 +1,7 @@
 import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-alumno',
@@ -9,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AlumnoPage implements OnInit {
 
-  constructor(private userService:UserService,private activatedRoute: ActivatedRoute) { }
+  constructor(private userService:UserService,private activatedRoute: ActivatedRoute,private loadingCtrl: LoadingController) { }
   rut: string;
   clases:any[]=[];
   clase: any;
@@ -38,6 +39,14 @@ async cargarAsistencias(){
 async ingresarAsistencia(){
   //console.log(this.rut): verificar el rut
     await this.userService.ingresarAsistencia(this.KEY_ASISTENCIAS, this.Qrcode,this.rut);
+    await this.cargando('Ingresando a la asistencia...');
+}
+async cargando(mensaje){
+  const loading = await this.loadingCtrl.create({
+    message: mensaje,
+    duration: 1000
+  });
+  loading.present();
 }
 
 }

@@ -9,8 +9,8 @@
       <ion-select-option *ngFor="let d of clases">{{d.cod_clase}}</ion-select-option>
     </ion-select> -->
   <ion-card-content>
-  <ion-input [(ngModel)]="value" disabled="true" style="color: white; font-weight:400;"></ion-input>
-  <ion-button *ngFor="let d of clases"  expand="full" (click)=" generarCodigo(d.cod_clase)">Iniciar clase</ion-button>
+  <ion-input [(ngModel)]="value" disabled="true"></ion-input>
+  <ion-button expand="full" (click)="generarCodigo(clase.cod_clase)">Iniciar clase</ion-button>
 <!--   <ion-input placeholder="Ingrese valor para el QR" [(ngModel)]="value" disabled="true"></ion-input> -->
 <!--   <ion-button expand="full" (click)="generarCodigo()">Iniciar clase</ion-button> -->
   </ion-card-content>  
